@@ -16,6 +16,7 @@ class CustomerMiddleware
     public function handle(Request $request, Closure $next): Response
     {   
         $user_type = auth()->user()->userType->role_name ?? '';
+        
         if(in_array($user_type,['admin']))
         {
             return redirect()->back();
