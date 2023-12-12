@@ -3,9 +3,12 @@
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
 use App\Http\Controllers\Admin\RoomCategoryController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\RoomController as ControllersRoomController;
 use App\Models\RoomCategory;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +22,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+//Customer Route
 Route::group(['middleware' => 'customer'], function() {
     Route::get('/', [HomeController::class,'index'])->name('index');
+    Route::get('/rooms', [ControllersRoomController::class,'index'])->name('room.index');
+    Route::get('/room/{id}/details', [ControllersRoomController::class,'show'])->name('room.show');
+
+    Route::post('room/{id}/reserve', [ReservationController::class,'store'])->name('room.reserve');
+    Route::get('reservations', [ReservationController::class,'index'])->name('reservation.index');
+
+    Route::put('reservations/{reservation}/cancel', [ReservationController::class,'cancel'])->name('reservation.cancel');
 });
 
 
@@ -55,6 +67,17 @@ Route::group(['prefix' => 'admin'], function(){
         Route::post('room/store', [RoomController::class,'store'])->name('admin.room.store');
         Route::get('room/{id}/edit', [RoomController::class,'edit'])->name('admin.room.edit');
         Route::put('room/{room}/update', [RoomController::class,'update'])->name('admin.room.update');
+
+
+        Route::get('reservation/pending',[AdminReservationController::class,'pending_index'])->name('admin.reservation.pending.index');
+        Route::post('reservation/{reservation}/approve', [AdminReservationController::class,'approveReservation'])->name('admin.reservation.approve');
+        Route::put('reservation/{reservation}/reject', [AdminReservationController::class,'rejectReservation'])->name('admin.reservation.reject');
+
+        Route::get('reservation/approved',[AdminReservationController::class,'approved_index'])->name('admin.reservation.approved.index');
+
+        Route::get('reservation/cancelled',[AdminReservationController::class,'cancelled_index'])->name('admin.reservation.cancelled.index');
+
+        Route::get('reservation/rejected',[AdminReservationController::class,'rejected_index'])->name('admin.reservation.rejected.index');
     }); 
     
 

@@ -158,6 +158,10 @@
                     </div>
                     @endforeach
                 </div>
+
+                <div class="row my-2 d-flex align-items-center justify-content-center">
+                    {{ $room_categories->links() }}
+                </div>
             </div>
         </div>
     </section>

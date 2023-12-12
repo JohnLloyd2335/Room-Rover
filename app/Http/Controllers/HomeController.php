@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $room_categories = RoomCategory::all();
+        $room_categories = RoomCategory::paginate(4);
 
         return view('index',compact('room_categories'));
     }

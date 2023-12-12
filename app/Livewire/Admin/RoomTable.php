@@ -13,6 +13,12 @@ class RoomTable extends Component
 
     public $search;
 
+    public $min;
+
+    public $max;
+
+    public $filter_category = [];
+
 
     public function render()
     {
@@ -26,10 +32,28 @@ class RoomTable extends Component
                     });
             });
         }
+
+        if (!empty($this->min) && !empty($this->max)) {
+            $rooms->whereHas('category', function ($query) {
+                $query->whereBetween('price', [$this->min, $this->max]);
+            });
+        }
+
+        if (!empty($this->filter_category)) {
+            $rooms->whereHas('category', function ($query) {
+                $query->whereIn('id', $this->filter_category);
+            });
+        }
+    
         
         $rooms = $rooms->paginate(5);
         
         return view('livewire.admin.room-table', compact('rooms'));
         
+    }
+
+    public function filterPrice($query)
+    {
+        $query->whereBetween('price',['min','max']);
     }
 }

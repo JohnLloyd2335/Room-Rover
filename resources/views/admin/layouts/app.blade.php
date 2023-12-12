@@ -121,22 +121,22 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="pending_reservation.html" class="nav-link">
+                  <a href="{{ route('admin.reservation.pending.index') }}" class="nav-link">
                     <p>Pending</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="approved_reservation.html" class="nav-link">
+                  <a href="{{ route('admin.reservation.approved.index') }}" class="nav-link">
                     <p>Approved</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="cancelled_reservation.html" class="nav-link">
+                  <a href="{{ route('admin.reservation.cancelled.index') }}" class="nav-link">
                     <p>Cancelled</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="rejected_reservation.html" class="nav-link">
+                  <a href="{{ route('admin.reservation.rejected.index') }}" class="nav-link">
                     <p>Rejected</p>
                   </a>
                 </li>

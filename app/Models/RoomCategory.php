@@ -17,7 +17,7 @@ class RoomCategory extends Model
 
     public function room() : HasMany 
     {
-        return $this->hasMany(Room::class);
+        return $this->hasMany(Room::class,'category_id');
     }
 
 }

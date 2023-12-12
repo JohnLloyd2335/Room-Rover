@@ -45,8 +45,8 @@
 
     <nav class="mainmenu mobile-menu">
         <ul>
-            <li class="active"><a href="{{ route('index') }}">Home</a></li>
-            <li><a href="./rooms.html">Rooms</a></li>
+            <li ><a href="{{ route('index') }}">Home</a></li>
+            <li><a href="{{ route('room.index') }}">Rooms</a></li>
             <li><a href="./about-us.html">About Us</a></li>
             <li><a href="./contact.html">Contact</a></li>
             @auth
@@ -77,7 +77,7 @@
 <header class="header-section">
 
     <div class="menu-item">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-2">
                     <div class="logo">
@@ -90,8 +90,8 @@
                     <div class="nav-menu">
                         <nav class="mainmenu">
                             <ul>
-                                <li class="active"><a href="{{ route('index') }}">Home</a></li>
-                                <li><a href="./rooms.html">Rooms</a></li>
+                                <li ><a href="{{ route('index') }}">Home</a></li>
+                                <li><a href="{{ route('room.index') }}">Rooms</a></li>
                                 <li><a href="./about-us.html">About Us</a></li>
                                 <li><a href="./contact.html">Contact</a></li>
                             </ul>
@@ -103,7 +103,7 @@
                                   {{ auth()->user()->name }}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                  <a class="dropdown-item" href="#">My Reservation</a>
+                                  <a class="dropdown-item" href="{{ route('reservation.index') }}">My Reservation</a>
                                   <a class="dropdown-item" href="#">My bookings</a>
                              
                                   <a class="dropdown-item" href="#">Transactions</a>
