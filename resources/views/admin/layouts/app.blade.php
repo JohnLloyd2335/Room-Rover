@@ -153,13 +153,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="unpaid_booking.html" class="nav-link">
-                    <p>Unpaid Booking</p>
+                  <a href="{{ route('admin.booking.on-going.index') }}" class="nav-link">
+                    <p>On-Going</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="paid_booking.html" class="nav-link">
-                    <p>Paid Booking</p>
+                  <a href="" class="nav-link">
+                    <p>Completed</p>
                   </a>
                 </li>
 
@@ -187,7 +187,7 @@
                 </li>
                 <li class="nav-item">
                   <a href="e_wallet_payment.html" class="nav-link">
-                    <p>E-wallet</p>
+                    <p>E-Wallet</p>
                   </a>
                 </li>
               </ul>

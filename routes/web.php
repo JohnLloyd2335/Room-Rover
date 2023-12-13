@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController;
+use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
 use App\Http\Controllers\Admin\RoomCategoryController;
@@ -78,6 +79,8 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('reservation/cancelled',[AdminReservationController::class,'cancelled_index'])->name('admin.reservation.cancelled.index');
 
         Route::get('reservation/rejected',[AdminReservationController::class,'rejected_index'])->name('admin.reservation.rejected.index');
+
+        Route::get('booking/on-going', [BookingController::class,'ongoing_booking_index'])->name('admin.booking.on-going.index');
     }); 
     
 
