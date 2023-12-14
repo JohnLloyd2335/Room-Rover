@@ -104,7 +104,7 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                   <a class="dropdown-item" href="{{ route('reservation.index') }}">My Reservation</a>
-                                  <a class="dropdown-item" href="#">My bookings</a>
+                                  <a class="dropdown-item" href="#">My Bookings</a>
                              
                                   <a class="dropdown-item" href="#">Transactions</a>
                                   <form action="{{ route('logout') }}" method="POST">
