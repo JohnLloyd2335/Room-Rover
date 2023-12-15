@@ -37,7 +37,7 @@
                         @include('includes.alert-message')
                     </div>
                 </div>
-                <form action="{{ route('admin.authenticate') }}" method="post">\
+                <form action="{{ route('admin.authenticate') }}" method="post">
                     @csrf
                     <div class="input-group my-2">
                         <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"

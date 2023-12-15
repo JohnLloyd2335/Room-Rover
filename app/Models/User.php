@@ -60,4 +60,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reservation::class);
     }
+
+    public function bookings() : HasMany 
+    {
+        return $this->hasMany(Booking::class,'user_id');
+    }
+
 }

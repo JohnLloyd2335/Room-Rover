@@ -1,6 +1,6 @@
 <div>
     <section class="contact-section spad">
-        <div class="container">
+        <div class="container-fluid">
             <div class="card shadow-lg py-3 px-3">
                 <div class="row">
                     <div class="col-12">

@@ -4,9 +4,11 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
 use App\Http\Controllers\Admin\RoomCategoryController;
 use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\BookingController as ControllersBookingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController as ControllersRoomController;
@@ -30,10 +32,16 @@ Route::group(['middleware' => 'customer'], function() {
     Route::get('/rooms', [ControllersRoomController::class,'index'])->name('room.index');
     Route::get('/room/{id}/details', [ControllersRoomController::class,'show'])->name('room.show');
 
-    Route::post('room/{id}/reserve', [ReservationController::class,'store'])->name('room.reserve');
-    Route::get('reservations', [ReservationController::class,'index'])->name('reservation.index');
+    Route::group(['middleware' => 'auth'], function() {
 
-    Route::put('reservations/{reservation}/cancel', [ReservationController::class,'cancel'])->name('reservation.cancel');
+        Route::post('room/{id}/reserve', [ReservationController::class,'store'])->name('room.reserve');
+        Route::get('reservations', [ReservationController::class,'index'])->name('reservation.index');
+        Route::put('reservations/{reservation}/cancel', [ReservationController::class,'cancel'])->name('reservation.cancel');
+
+        Route::get('bookings', [ControllersBookingController::class,'index'])->name('booking.index');
+    });
+
+  
 });
 
 
@@ -81,6 +89,8 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('reservation/rejected',[AdminReservationController::class,'rejected_index'])->name('admin.reservation.rejected.index');
 
         Route::get('booking/on-going', [BookingController::class,'ongoing_booking_index'])->name('admin.booking.on-going.index');
+
+        Route::post('booking/{id}/pay/cash', [PaymentController::class,'payCash'])->name('admin.payment.pay.cash');
     }); 
     
 
