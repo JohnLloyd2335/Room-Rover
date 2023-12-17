@@ -28,4 +28,11 @@ class Payment extends Model
             get : fn($value) => date('M d, Y h:i A',strtotime($value))
         );
     }
+
+    public function paymentDate() : Attribute 
+    {
+        return Attribute::make(
+            get : fn($value) => date('M d, Y h:i A', strtotime($value))
+        );
+    }
 }

@@ -8,11 +8,13 @@ use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
 use App\Http\Controllers\Admin\RoomCategoryController;
 use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\BookingController as ControllersBookingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController as ControllersPaymentController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController as ControllersRoomController;
+use App\Http\Controllers\TransactionController as ControllersTransactionController;
 use App\Models\RoomCategory;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +45,8 @@ Route::group(['middleware' => 'customer'], function() {
 
         Route::post('booking/{id}/pay/e-wallet', [ControllersPaymentController::class,'payEWallet'])->name('payment.pay.ewallet');
         Route::post('booking/{id}/pay/credit_card', [ControllersPaymentController::class,'payCreditCard'])->name('payment.pay.credit_card');
+
+        Route::get('transactions', [ControllersTransactionController::class,'index'])->name('transaction.index');
     });
 
   
@@ -97,6 +101,9 @@ Route::group(['prefix' => 'admin'], function(){
         Route::post('booking/{booking}/complete', [BookingController::class,'complete_booking'])->name('admin.booking.complete');
 
         Route::get('booking/completed', [BookingController::class,'completed_booking_index'])->name('admin.booking.completed');
+
+        Route::get('transaction', [TransactionController::class,'index'])->name('admin.transaction');
+
 
     }); 
     

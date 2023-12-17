@@ -108,7 +108,7 @@
                                   <a class="dropdown-item" href="{{ route('reservation.index') }}">My Reservation</a>
                                   <a class="dropdown-item" href="{{ route('booking.index') }}">My Bookings</a>
                              
-                                  <a class="dropdown-item" href="#">Transactions</a>
+                                  <a class="dropdown-item" href="{{ route('transaction.index') }}">Transactions</a>
                                   <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="dropdown-item" >Logout</button>
