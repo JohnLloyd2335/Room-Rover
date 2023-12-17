@@ -50,8 +50,8 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr class="text-center">
-                                    {{-- <th>ID</th>
-                                    <th>Reservation ID</th> --}}
+                                    <th>ID</th>
+                                    <th>Reservation ID</th>
                                     <th>Customer</th>
                                     <th>Room</th>
                                     <th>Category</th>
@@ -66,8 +66,8 @@
                             <tbody>
                                 @forelse($bookings as $booking)
                                     <tr class="text-center">
-                                        {{-- <td>{{ $booking->id }}</td>
-                                        <td>{{ $booking->reservation->id }}</td> --}}
+                                        <td>{{ $booking->id }}</td>
+                                        <td>{{ $booking->reservation->id }}</td>
                                         <td>{{ $booking->reservation->user->name }}</td>
                                         <td>{{ $booking->reservation->room->name }}</td>
                                         <td>{{ $booking->reservation->room->category->name }}</td>
@@ -79,7 +79,7 @@
                                                 @break
 
                                                 @case(false)
-                                                    <button class="btn btn-sm btn-primary">Pay Now</button>
+                                                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#paymentModal{{ $booking->id }}">Pay</button>
                                                 @break
 
                                                 @default
@@ -174,14 +174,15 @@
                                                                         Payment Method :
                                                                         <strong>{{ $booking->is_paid ? $booking->payment->payment_method : 'Not Applicable (Unpaid)' }}</strong>
                                                                     </p>
-                                                                    <p>
-                                                                        Amount To Pay/Paid:
-                                                                        <strong>₱{{ $booking->amount }}</strong>
-                                                                    </p>
+                                                                    
                                                                     <p>Payment Date:
                                                                         <strong>{{ $booking->payment->created_at ?? '' }}</strong>
                                                                     </p>
                                                                 @endif
+                                                                <p>
+                                                                    Amount To Pay/Paid:
+                                                                    <strong>₱{{ $booking->amount }}</strong>
+                                                                </p>
                                                                 <p>Booking Status: <strong>
                                                                         @switch($booking->status)
                                                                             @case('Completed')
@@ -213,6 +214,147 @@
                                                             </div>
 
                                                         </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" data-dismiss="modal"
+                                                            class="btn btn-secondary">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Payment Modal -->
+                                        <div class="modal fade" id="paymentModal{{ $booking->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h2 class="modal-title" id="exampleModalLabel">View Booking</h2>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <div class="row">
+                                                            <div class="col-12 d-flex flex-column align-items-center">
+                                                                <img src="{{ asset('storage/' . $booking->reservation->room->image_path) }}"
+                                                                    style="width: 700px; height:400px"
+                                                                    alt="Category Image" class="img-fluid">
+                                                                <h4 class="modal-title fw-bold my-2 text-center"
+                                                                    id="exampleModalLabel">
+                                                                    {{ $booking->reservation->room->name }}</h4>
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div class="row my-2 px-5">
+
+                                                            <div class="col-6">
+                                                                <p class="fw-bold text-center">Booking Details:</p>
+                                                                <p>Customer Name:
+                                                                    <strong>{{ $booking->reservation->user->name }}</strong>
+                                                                </p>
+                                                                <p>Email:
+                                                                    <strong>{{ $booking->reservation->user->email }}</strong>
+                                                                </p>
+                                                                <p>Contact Number:
+                                                                    <strong>{{ $booking->reservation->user->mobile_number }}</strong>
+                                                                </p>
+                                                                <p>Checked In/Out:
+                                                                    <strong>{{ $booking->checked_in . ' to ' . $booking->checked_out }}</strong>
+                                                                </p>
+                                                                <p>Payment Status: <strong>
+                                                                        @switch($booking->is_paid)
+                                                                            @case(true)
+                                                                                <span class="badge badge-success">Paid</span>
+                                                                            @break
+
+                                                                            @case(false)
+                                                                                <span class="badge badge-danger">Unpaid</span>
+                                                                            @break
+
+                                                                            @default
+                                                                                <span
+                                                                                    class="badge badge-primary">{{ $booking->is_paid }}
+                                                                                    </sp>
+                                                                            @endswitch
+                                                                    </strong>
+                                                                </p>
+                                                                @if ($booking->is_paid)
+                                                                    <p>
+                                                                        Payment Method :
+                                                                        <strong>{{ $booking->is_paid ? $booking->payment->payment_method : 'Not Applicable (Unpaid)' }}</strong>
+                                                                    </p>
+                                                                    <p>
+                                                                        Amount To Pay/Paid:
+                                                                        <strong>₱{{ $booking->amount }}</strong>
+                                                                    </p>
+                                                                    <p>Payment Date:
+                                                                        <strong>{{ $booking->payment->created_at ?? '' }}</strong>
+                                                                    </p>
+                                                                @endif
+                                                                <p>Ammount To Pay/Paid:
+                                                                    <strong>{{ $booking->amount }}</strong>
+                                                                </p>
+                                                                <p>Booking Status: <strong>
+                                                                        @switch($booking->status)
+                                                                            @case('Completed')
+                                                                                <span class="badge badge-success">Completed
+                                                                                    </sp>
+                                                                                @break
+
+                                                                                @case('On-Going')
+                                                                                    <span
+                                                                                        class="badge badge-primary">On-Going</span>
+                                                                                @break
+
+                                                                                @default
+                                                                                    <span
+                                                                                        class="badge badge-info">{{ $booking->status }}</span>
+                                                                            @endswitch
+                                                                    </strong></p>
+                                                                   
+                                                            </div>
+                                                            <div class="col-6 px-5">
+                                                                <p class="fw-bold text-center">Room Details:</p>
+                                                                <p>Price per Night:
+                                                                    <strong>₱{{ $booking->reservation->room->category->price }}</strong>
+                                                                </p>
+                                                                <p>Size (sqm):
+                                                                    <strong>{{ $booking->reservation->room->category->size }}</strong>
+                                                                </p>
+                                                                <p>Capacity (max person):
+                                                                    <strong>{{ $booking->reservation->room->category->capacity }}</strong>
+                                                                </p>
+                                                            </div>
+
+                                                        </div>
+
+
+                                                      
+                                                         <div class="my-2 d-flex align-items-center justify-content-center flex-column">
+                                                            <strong class="text-center">Select Payment Method</strong>
+                                                            <div class="my-2">
+                                                                <form action="{{ route('payment.pay.credit_card',$booking->id) }}" method="post" class="d-inline-block">
+                                                                    @csrf
+                                                                    <div class="d-inline-block">
+                                                                        <input type="hidden" name="booking_id" value="{{ $booking->id }}" required>
+                                                                        <button type="submit" class="btn btn-success">Credit Card</button>
+                                                                    </div>
+                                                                </form>
+                                                            
+                                                                <form action="{{ route('payment.pay.ewallet',$booking->id) }}" method="post" class="d-inline-block">
+                                                                    @csrf
+                                                                    <div class="d-inline-block">
+                                                                        <input type="hidden" name="booking_id" value="{{ $booking->id }}" required>
+                                                                        <button type="submit" class="btn btn-primary">E-Wallet</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                         </div>   
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" data-dismiss="modal"

@@ -24,13 +24,14 @@ class PaymentController extends Controller
         $description = PaymentHelper::description($request->amount, 'cash', $booking->checked_in, $booking->checked_out,$request->room_name);
 
         try {
-
+            
             $payment = Payment::create([
                 'booking_id' => $request->booking_id,
                 'reference_number' => $reference_number,
                 'payment_method' => "Cash",
                 'amount' => $request->amount,
-                'description' => $description
+                'description' => $description,
+                'payment_date' => date('Y-m-d h:i:s')
             ]);
 
             $payment->booking->update([

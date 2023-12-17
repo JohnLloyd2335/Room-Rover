@@ -158,38 +158,11 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="" class="nav-link">
+                  <a href="{{ route('admin.booking.completed') }}" class="nav-link">
                     <p>Completed</p>
                   </a>
                 </li>
 
-              </ul>
-            </li>
-
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-dollar"></i>
-                <p>
-                  Payment
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="cash_payment.html" class="nav-link">
-                    <p>Cash</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="credit_card_payment.html" class="nav-link">
-                    <p>Credit Card</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="e_wallet_payment.html" class="nav-link">
-                    <p>E-Wallet</p>
-                  </a>
-                </li>
               </ul>
             </li>
 
@@ -258,9 +231,7 @@
      <footer class="main-footer">
       <strong>Copyright &copy; 2023 <a class="text-info">Room Rover</a></strong>
       All rights reserved.
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.0.1-pre
-      </div>
+
     </footer>
 
     <!-- Control Sidebar -->

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\RoomCategoryController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\BookingController as ControllersBookingController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController as ControllersPaymentController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController as ControllersRoomController;
 use App\Models\RoomCategory;
@@ -39,6 +40,9 @@ Route::group(['middleware' => 'customer'], function() {
         Route::put('reservations/{reservation}/cancel', [ReservationController::class,'cancel'])->name('reservation.cancel');
 
         Route::get('bookings', [ControllersBookingController::class,'index'])->name('booking.index');
+
+        Route::post('booking/{id}/pay/e-wallet', [ControllersPaymentController::class,'payEWallet'])->name('payment.pay.ewallet');
+        Route::post('booking/{id}/pay/credit_card', [ControllersPaymentController::class,'payCreditCard'])->name('payment.pay.credit_card');
     });
 
   
@@ -89,8 +93,11 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('reservation/rejected',[AdminReservationController::class,'rejected_index'])->name('admin.reservation.rejected.index');
 
         Route::get('booking/on-going', [BookingController::class,'ongoing_booking_index'])->name('admin.booking.on-going.index');
-
         Route::post('booking/{id}/pay/cash', [PaymentController::class,'payCash'])->name('admin.payment.pay.cash');
+        Route::post('booking/{booking}/complete', [BookingController::class,'complete_booking'])->name('admin.booking.complete');
+
+        Route::get('booking/completed', [BookingController::class,'completed_booking_index'])->name('admin.booking.completed');
+
     }); 
     
 

@@ -79,8 +79,35 @@
                                     <button class="btn btn-sm btn-success" data-bs-toggle="modal"
                                         data-bs-target="#viewBookingModal{{ $booking->id }}"><i
                                             class="fas fa-eye"></i></button>
-                                    <button class="btn btn-sm btn-primary"><i class="fas fa-check"></i></button>
+                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#completeBooking{{ $booking->id }}" @disabled(!$booking->is_paid)><i class="fas fa-check"></i></button>
                                 </td>
+
+                                <!-- Confirm Booking Modal -->
+                                <div class="modal fade" id="completeBooking{{ $booking->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Complete Booking</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <p>Confirm completion of this booking? Once marked as completed, the status will be updated, and no further changes can be made</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                          <form action="{{ route('admin.booking.complete', $booking) }}" method="POST">
+                                            @csrf
+                                          <button type="submit" class="btn btn-primary">Yes</button>
+                                          </form>
+                                  
+                                        
+                                        
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
 
                                 <!-- View Modal -->
                                 <div class="modal fade" id="viewBookingModal{{ $booking->id }}" tabindex="-1"
@@ -147,12 +174,13 @@
                                                             Payment Method :
                                                             <strong>{{ $booking->is_paid ? $booking->payment->payment_method : 'Not Applicable (Unpaid)' }}</strong>
                                                         </p>
+                                                       
+                                                        <p>Payment Date: <strong>{{ $booking->payment->created_at ?? '' }}</strong></p>
+                                                        @endif
                                                         <p>
                                                             Amount To Pay/Paid:
                                                             <strong>₱{{ $booking->amount }}</strong>
                                                         </p>
-                                                        <p>Payment Date: <strong>{{ $booking->payment->created_at ?? '' }}</strong></p>
-                                                        @endif
                                                         <p>Booking Status: <strong>
                                                             @switch($booking->status)
                                                                 @case('Completed')
@@ -257,12 +285,13 @@
                                                             Payment Method :
                                                             <strong>{{ $booking->is_paid ? $booking->payment->payment_method : 'Not Applicable (Unpaid)' }}</strong>
                                                         </p>
+                                                        
+                                                        <p>Payment Date: <strong>{{ $booking->payment->created_at ?? '' }}</strong></p>
+                                                        @endif
                                                         <p>
                                                             Amount To Pay/Paid:
                                                             <strong>₱{{ $booking->amount }}</strong>
                                                         </p>
-                                                        <p>Payment Date: <strong>{{ $booking->payment->created_at ?? '' }}</strong></p>
-                                                        @endif
                                                         <p>Booking Status: <strong>
                                                             @switch($booking->status)
                                                                 @case('Completed')

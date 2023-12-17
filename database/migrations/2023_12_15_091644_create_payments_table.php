@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('reference_number');
             $table->double('amount');
             $table->text('description');
+            $table->dateTime('payment_date');
             $table->timestamps();
         });
     }
