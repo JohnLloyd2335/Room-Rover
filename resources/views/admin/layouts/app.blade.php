@@ -187,34 +187,13 @@
             </li>
 
 
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
+            <li class="nav-item">
+              <a href="{{ route('admin.user.index') }}" class="nav-link">
+                <i class="nav-icon fa-solid fa-users"></i>
                 <p>
                   Users
-                  <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pending_users.html" class="nav-link">
-
-                    <p>Pending Users</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="approved_users.html" class="nav-link">
-
-                    <p>Approved Users</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="rejected_users.html" class="nav-link">
-
-                    <p>Rejected Users</p>
-                  </a>
-                </li>
-              </ul>
             </li>
 
 

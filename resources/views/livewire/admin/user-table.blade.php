@@ -19,33 +19,31 @@
                     <thead>
                         <tr class="text-center">
                             <th>ID</th>
-                            <th>Booking ID</th>
-                            <th>Customer</th>
-                            <th>Room</th>
-                            <th>Category</th>
-                            <th>Checked In/Out</th>
-                            <th>Rating</th>
-                            <th>Comment</th>
-                            <th>Date Rated</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Mobile Number</th>
+                            <th>Age</th>
+                            <th>Date of Birth</th>
+                            <th>Gender</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($ratings as $rating)
+                        @forelse($users as $user)
                             <tr class="text-center">
-                                <td>{{ $rating->id }}</td>
-                                <td>{{ $rating->booking->id }}</td>
-                                <td>{{ $rating->user->name }}</td>
-                                <td>{{ $rating->room->name }}</td>
-                                <td>{{ $rating->room->category->name }}</td>
-                                <td>{{ $rating->booking->checked_in." to ".$rating->booking->checked_out }}</td>
-                                <td>{{ $rating->rating }}</td>
-                                <td>{{ $rating->comment }}</td>
-                                <td>{{ $rating->rating_date }}</td>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->address }}</td>
+                                <td>{{ $user->mobile_number }}</td>
+                                <td>{{ $user->age }}</td>
+                                <td>{{ $user->dob }}</td>
+                                <td>{{ $user->gender }}</td>
                             </tr>
 
                         @empty
                             <tr class="text-center">
-                                <td colspan="9" class="text-center fw-bold">No Records Found.</td>
+                                <td colspan="8" class="text-center fw-bold">No Records Found.</td>
                             </tr>
                         @endforelse
                        
@@ -57,7 +55,7 @@
         <!--Pagination-->
         <div class="row">
             <div class="col-12 d-flex align-item-center justify-content-end">
-               {{ $ratings->links() }}
+               {{ $users->links() }}
             </div>
         </div>
 

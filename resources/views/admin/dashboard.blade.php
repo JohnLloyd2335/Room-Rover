@@ -29,7 +29,7 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>0</h3>
+                                <h3>{{ $categories_count }}</h3>
                                 <p>Room Categories</p>
                             </div>
                             <div class="icon">
@@ -43,7 +43,7 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>0</h3>
+                                <h3>{{ $room_count }}</h3>
 
                                 <p>Room</p>
                             </div>
@@ -58,7 +58,7 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>0</h3>
+                                <h3>{{ $user_count }}</h3>
 
                                 <p>Customers</p>
                             </div>
@@ -73,7 +73,7 @@
                         <!-- small box -->
                         <div class="small-box bg-dark">
                             <div class="inner">
-                                <h3>0</h3>
+                                <h3>{{ $reservation_count }}</h3>
 
                                 <p>Reservation</p>
                             </div>
@@ -89,7 +89,7 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>0</h3>
+                                <h3>{{ $booking_count }}</h3>
 
                                 <p> Bookings</p>
                             </div>
@@ -105,7 +105,7 @@
                         <!-- small box -->
                         <div class="small-box bg-secondary">
                             <div class="inner">
-                                <h3>0</h3>
+                                <h3>₱{{ $monthly_income }}</h3>
 
                                 <p>Monthly Income</p>
                             </div>
@@ -121,7 +121,7 @@
                         <!-- small box -->
                         <div class="small-box bg-primary">
                             <div class="inner">
-                                <h3>0</h3>
+                                <h3>₱{{ $yearly_income }}</h3>
 
                                 <p>Yearly Income</p>
                             </div>
@@ -148,11 +148,10 @@
                                     Income
                                 </h3>
                                 <div class="card-tools">
-                                    <select class="form-control">
-                                        <option>Daily</option>
+                                    {{-- <select class="form-control">
                                         <option>Monthly</option>
                                         <option>Yearly</option>
-                                    </select>
+                                    </select> --}}
                                 </div>
                             </div><!-- /.card-header -->
                             <div class="card-body">

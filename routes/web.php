@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ReservationController as AdminReservationControll
 use App\Http\Controllers\Admin\RoomCategoryController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\BookingController as ControllersBookingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController as ControllersPaymentController;
@@ -109,6 +110,8 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('transaction', [TransactionController::class,'index'])->name('admin.transaction');
 
         Route::get('ratings', [RatingController::class,'index'])->name('admin.rating.index');
+
+        Route::get('user', [UserController::class,'index'])->name('admin.user.index');
 
 
     }); 
