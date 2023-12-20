@@ -50,7 +50,7 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr class="text-center">
-                                    <th>ID</th>
+                                    {{-- <th>ID</th> --}}
                                     <th>Customer Name</th>
                                     <th>Room Name</th>
                                     <th>Category</th>
@@ -63,7 +63,7 @@
                             <tbody>
                                 @forelse($reservations as $reservation)
                                     <tr class="text-center">
-                                        <td>{{ $reservation->id }}</td>
+                                        {{-- <td>{{ $reservation->id }}</td> --}}
                                         <td>{{ $reservation->user->name }}</td>
                                         <td>{{ $reservation->room->name }}</td>
                                         <td>{{ $reservation->room->category->name }}</td>

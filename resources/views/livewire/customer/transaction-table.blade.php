@@ -50,8 +50,8 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr class="text-center">
-                                    <th>ID</th>
-                                    <th>Transaction ID</th>
+                                    {{-- <th>ID</th> --}}
+                                    {{-- <th>Transaction ID</th> --}}
                                     <th>Customer</th>
                                     <th>Room</th>
                                     <th>Category</th>
@@ -66,8 +66,8 @@
                             <tbody>
                                 @forelse($transactions as $transaction)
                                     <tr class="text-center">
-                                        <td>{{ $transaction->id }}</td>
-                                        <td>{{ $transaction->booking->id }}</td>
+                                        {{-- <td>{{ $transaction->id }}</td> --}}
+                                        {{-- <td>{{ $transaction->booking->id }}</td> --}}
                                         <td>{{ $transaction->booking->user->name }}</td>
                                         <td>{{ $transaction->booking->room->name }}</td>
                                         <td>{{ $transaction->booking->room->category->name }}</td>

@@ -178,10 +178,10 @@
 
 
             <li class="nav-item">
-              <a href="reports.html" class="nav-link">
-                <i class="nav-icon fa-solid fa-chart-line"></i>
+              <a href="{{ route('admin.rating.index') }}" class="nav-link">
+                <i class="nav-icon fa-solid fa-star"></i>
                 <p>
-                  Reports
+                  Ratings
                 </p>
               </a>
             </li>

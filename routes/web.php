@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Auth\LogoutController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\RatingController;
 use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
 use App\Http\Controllers\Admin\RoomCategoryController;
 use App\Http\Controllers\Admin\RoomController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\BookingController as ControllersBookingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController as ControllersPaymentController;
+use App\Http\Controllers\RatingController as ControllersRatingController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController as ControllersRoomController;
 use App\Http\Controllers\TransactionController as ControllersTransactionController;
@@ -47,6 +49,8 @@ Route::group(['middleware' => 'customer'], function() {
         Route::post('booking/{id}/pay/credit_card', [ControllersPaymentController::class,'payCreditCard'])->name('payment.pay.credit_card');
 
         Route::get('transactions', [ControllersTransactionController::class,'index'])->name('transaction.index');
+
+        Route::post('booking/{id}/rate', [ControllersRatingController::class,'store'])->name('booking.rate.store');
     });
 
   
@@ -103,6 +107,8 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('booking/completed', [BookingController::class,'completed_booking_index'])->name('admin.booking.completed');
 
         Route::get('transaction', [TransactionController::class,'index'])->name('admin.transaction');
+
+        Route::get('ratings', [RatingController::class,'index'])->name('admin.rating.index');
 
 
     }); 

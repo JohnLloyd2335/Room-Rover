@@ -49,5 +49,10 @@ class Booking extends Model
     {
         return $this->hasOne(Payment::class,'booking_id');
     }
+
+    public function rating() : HasOne 
+    {
+        return $this->hasOne(Booking::class,'booking_id');
+    }
     
 }

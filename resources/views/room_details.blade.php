@@ -4,42 +4,50 @@
     <section class="room-details-section spad my-3">
         <div class="container">
             @if (session('error'))
-                    <div class="my-2">
-                        <div class="alert alert-danger alert-dismissible" role="alert">
-                           {{ session('error') }}
-                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                           </button>
-                        </div>
+                <div class="my-2">
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                @endif
+                </div>
+            @endif
 
-                @if (session('success'))
-                    <div class="my-2">
-                        <div class="alert alert-success alert-dismissible" role="alert">
-                           {{ session('success') }}
-                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                           </button>
-                        </div>
+            @if (session('success'))
+                <div class="my-2">
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                @endif
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-8">
                     <div class="room-details-item">
-                        <img src="{{ asset('storage/' . $room->image_path) }}" alt="Room Iamge" height="500" width="1200">
+                        <img src="{{ asset('storage/' . $room->image_path) }}" alt="Room Iamge" height="500"
+                            width="1200">
                         <div class="rd-text">
                             <div class="rd-title">
                                 <h3>{{ $room->name }}</h3>
                                 <div class="rdt-right">
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
-                                    </div>
-
+                                    {{ $room_avg }} / 5.0
+                                    @php
+                                        $roundedRating = round($room_avg * 2) / 2;
+                                        $integerPart = floor($roundedRating);
+                                        $decimalPart = $roundedRating - $integerPart;
+                                    @endphp
+                                    @for ($i = 0; $i < 5; $i++)
+                                        @if ($i < $integerPart)
+                                            <i class="fas fa-star text-warning"></i>
+                                        @elseif ($decimalPart >= 0.5 && $i === $integerPart)
+                                            <i class="fas fa-star-half-alt text-warning"></i>
+                                        @else
+                                            <i class="far fa-star text-secondary"></i>
+                                        @endif
+                                    @endfor
                                 </div>
                             </div>
                             <h2>₱{{ $room->category->price }}<span>/Night</span></h2>
@@ -73,47 +81,8 @@
                             </p>
                         </div>
                     </div>
-                    <div class="rd-reviews">
-                        <h4>Reviews</h4>
-                        <div class="review-item">
-                            <div class="ri-pic">
-                                <img src="{{ asset('img/room/avatar/avatar-1.jpg') }}" alt="">
-                            </div>
-                            <div class="ri-text">
-                                <span>27 Aug 2019</span>
-                                <div class="rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star-half_alt"></i>
-                                </div>
-                                <h5>Brandon Kelley</h5>
-                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                    adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                    magnam.</p>
-                            </div>
-                        </div>
-                        <div class="review-item">
-                            <div class="ri-pic">
-                                <img src="{{ asset('img/room/avatar/avatar-2.jpg') }}" alt="">
-                            </div>
-                            <div class="ri-text">
-                                <span>27 Aug 2019</span>
-                                <div class="rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star-half_alt"></i>
-                                </div>
-                                <h5>Brandon Kelley</h5>
-                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                    adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                    magnam.</p>
-                            </div>
-                        </div>
-                    </div>
+
+                    <livewire:customer.review :room_id="$room->id">
 
                 </div>
                 <div class="col-lg-4 disabled">
@@ -127,13 +96,15 @@
                     <div class="room-booking ">
 
                         <h3 class="text-center">Reserve Now</h3>
-                        <form action="{{ route('room.reserve',$room->id) }}" method="POST">
+                        <form action="{{ route('room.reserve', $room->id) }}" method="POST">
                             @csrf
                             <input type="hidden" name="user_id" value="{{ auth()->user()->id ?? '' }}">
                             <input type="hidden" name="room_id" value="{{ $room->id }}">
                             <div class="check-date">
                                 <label for="date-in">Check In:</label>
-                                <input type="text" class="date-input @error('start_date') is-invalid @enderror" id="date-in" name="start_date" @disabled(!$room->is_available) value="{{ old('start_date') }}">
+                                <input type="text" class="date-input @error('start_date') is-invalid @enderror"
+                                    id="date-in" name="start_date" @disabled(!$room->is_available)
+                                    value="{{ old('start_date') }}">
                                 <i class="icon_calendar"></i>
                             </div>
                             @error('start_date')
@@ -141,7 +112,9 @@
                             @enderror
                             <div class="check-date">
                                 <label for="date-out">Check Out:</label>
-                                <input type="text" class="date-input @error('end_date') is-invalid @enderror" id="date-out" name="end_date" @disabled(!$room->is_available) value="{{ old('end_date') }}">
+                                <input type="text" class="date-input @error('end_date') is-invalid @enderror"
+                                    id="date-out" name="end_date" @disabled(!$room->is_available)
+                                    value="{{ old('end_date') }}">
                                 <i class="icon_calendar"></i>
                             </div>
                             @error('end_date')

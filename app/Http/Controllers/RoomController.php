@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rating;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,8 @@ class RoomController extends Controller
     {
         $room = Room::with('category')->findOrFail($id);
 
-        return view('room_details', compact('room'));
+        $room_avg = Rating::where('room_id',$id)->avg('rating') ?? 0;
+
+        return view('room_details', compact('room','room_avg'));
     }
 }
