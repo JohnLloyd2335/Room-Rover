@@ -572,22 +572,5 @@
         </section>
     </div>
 
-    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <!-- Custom JS -->
-    <script>
-        $(".rating-stars i").click(function() {
-            let rating = $(this).data("rating");
-            $(".rating-stars i").removeClass("active");
-            $(this).prevAll().addBack().addClass("active");
-            submitRating();
-        });
-
-        function submitRating() {
-            let rating = $(".rating-stars i.active").length;
-            $("#rating").val(rating);
-        }
-    </script>
+    
+  

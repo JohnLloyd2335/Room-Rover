@@ -37,6 +37,8 @@ Route::group(['middleware' => 'customer'], function() {
     Route::get('/', [HomeController::class,'index'])->name('index');
     Route::get('/rooms', [ControllersRoomController::class,'index'])->name('room.index');
     Route::get('/room/{id}/details', [ControllersRoomController::class,'show'])->name('room.show');
+    Route::view('about', 'about')->name('about');
+    Route::view('contact', 'contact')->name('contact');
 
     Route::group(['middleware' => 'auth'], function() {
 
@@ -52,6 +54,8 @@ Route::group(['middleware' => 'customer'], function() {
         Route::get('transactions', [ControllersTransactionController::class,'index'])->name('transaction.index');
 
         Route::post('booking/{id}/rate', [ControllersRatingController::class,'store'])->name('booking.rate.store');
+
+       
     });
 
   

@@ -4,14 +4,14 @@
     <section class="hero-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="hero-text">
                         <h1>Room Rover</h1>
                         <p>Find Your Perfect Space – Roam, Relax, and Reserve with Room Rover.</p>
                         <a href="#" class="primary-btn">Check Our Rooms</a>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
+                {{-- <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                     <div class="booking-form">
                         <h3 class="text-center">Reserve Now</h3>
                         <form action="#">
@@ -40,7 +40,7 @@
                             <button type="submit">Check Availability</button>
                         </form>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="hero-slider owl-carousel">
