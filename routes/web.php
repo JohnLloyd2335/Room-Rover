@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\BookingController as ControllersBookingController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController as ControllersPaymentController;
 use App\Http\Controllers\RatingController as ControllersRatingController;
@@ -38,7 +39,8 @@ Route::group(['middleware' => 'customer'], function() {
     Route::get('/rooms', [ControllersRoomController::class,'index'])->name('room.index');
     Route::get('/room/{id}/details', [ControllersRoomController::class,'show'])->name('room.show');
     Route::view('about', 'about')->name('about');
-    Route::view('contact', 'contact')->name('contact');
+    Route::get('contact', [ContactUsController::class,'index'])->name('contact');
+    Route::post('contact/send', [ContactUsController::class,'contactUS'])->name('contact.send');
 
     Route::group(['middleware' => 'auth'], function() {
 
